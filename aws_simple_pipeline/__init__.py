@@ -2,6 +2,9 @@
 
 This package contains the modules for deploying a simple AWS CDK pipeline on AWS.
 
+It is part of the educational repositories (https://github.com/pandle/materials)
+to learn how to write stardard code and common uses of the CI/CD.
+
 Package contents one class named PipelineStack that
 it extended the core.Stack class of aws_cdk package.
 

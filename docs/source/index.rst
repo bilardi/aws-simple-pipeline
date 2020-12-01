@@ -6,6 +6,8 @@
 Welcome to AWS simple pipeline's documentation!
 ===============================================
 
+This package contains the classes for deploying an AWS simple pipeline.
+
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
