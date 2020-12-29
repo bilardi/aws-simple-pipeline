@@ -12,7 +12,7 @@ setuptools.setup(
     url="https://aws-simple-pipeline.readthedocs.io/",
     packages=setuptools.find_packages(),
     install_requires=[
-        "aws-cdk.core==1.62.0",
+        "aws-cdk.core>=1.62.0,<=1.80.0",
     ],
     classifiers=[
         "Programming Language :: Python :: 3",

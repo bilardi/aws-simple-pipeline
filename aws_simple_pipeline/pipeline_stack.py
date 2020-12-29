@@ -109,7 +109,7 @@ class PipelineStack(core.Stack):
                 ]
             ),
             codepipeline.StageProps(
-                stage_name="Manual Approval",
+                stage_name="ManualApproval",
                 actions=[
                     codepipeline_actions.ManualApprovalAction(
                         action_name="ManualApproval",
