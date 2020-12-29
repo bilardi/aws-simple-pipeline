@@ -8,6 +8,7 @@ The class requires the follow properties:
     'github_token' (obj): AWS object with reference like Secrets Manager
     'notify_emails' (list): list of emails to notify
     'policies' (list): list of policies name to add 
+    'buildspec_path' (str): path of buildspec file, default: buildspec.yml
     'manual_approval_exists' (bool): if True, then there will be a manual approval stage
 
 All properties are mandatory, except the last one that it has a default value of False.
@@ -38,7 +39,7 @@ from aws_cdk import (core, aws_codebuild as codebuild,
 
 class PipelineStack(core.Stack):
 
-    def __init__(self, scope: core.Construct, id: str, *, github_owner: str=None, github_repo: str=None, github_branch: str=None, github_token: str=None, notify_emails: list=None, policies: list=None, manual_approval_exists: bool=False, **kwargs) -> None:
+    def __init__(self, scope: core.Construct, id: str, *, github_owner: str=None, github_repo: str=None, github_branch: str=None, github_token: str=None, notify_emails: list=None, policies: list=None, buildspec_path: str='buildspec.yml', manual_approval_exists: bool=False, **kwargs) -> None:
         """
         deploys all AWS resources for your pipeline
             Resources:
@@ -68,7 +69,7 @@ class PipelineStack(core.Stack):
         project = codebuild.PipelineProject(
             self, "Project",
             project_name=id + stage,
-            build_spec=codebuild.BuildSpec.from_source_filename('buildspec.yml'),
+            build_spec=codebuild.BuildSpec.from_source_filename(buildspec_path),
             cache=codebuild.Cache.bucket(artifact_bucket, prefix='codebuild-cache'),
             environment=codebuild.BuildEnvironment(
                 build_image=codebuild.LinuxBuildImage.STANDARD_4_0

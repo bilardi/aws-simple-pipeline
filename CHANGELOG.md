@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.0.2] - 2020-12-29
+
+### Added
+- custom path of file named buildspec.yml
+
+### Changed
+- the extended class for unit tests
+- the requirements needs
+
 ## [0.0.1] - 2020-11-03
 
 ### Added
@@ -14,5 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - the init files of package and tests
 - the documentation by sphinx
 
-[Unreleased]: https://github.com/bilardi/aws-saving/compare/v0.0.1...HEAD
+[Unreleased]: https://github.com/bilardi/aws-saving/compare/v0.0.2...HEAD
+[0.0.2]: https://github.com/bilardi/aws-saving/releases/tag/v0.0.2
 [0.0.1]: https://github.com/bilardi/aws-saving/releases/tag/v0.0.1

@@ -32,4 +32,10 @@ You have to use the files **app.py** and **buildspec.yml**
 * CD is Continuous Delivery, if you set ``manual_approval_exists = True`` on the file **app.py**
 * CD is Continuous Deployment, if you set ``manual_approval_exists = False`` on the file **app.py**
 
-You have to save the **buildspec.yml** file in the same directory of **app.py** file.
+You can save the **buildspec.yml** file in the same directory of **app.py** file,
+and it will be loaded without defining anything.
+
+Or you can also save it in another folder,
+
+* you have to set ``buildspec_path = 'relative/path/from/repo/root/buildspec.yml'`` on the file **app.py**
+* you can find an example on the file `aws-tool-comparison/cdk/python/app.py <https://github.com/bilardi/aws-tool-comparison/tree/master/cdk/python/app.py>`_
