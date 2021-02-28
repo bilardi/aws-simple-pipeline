@@ -2,6 +2,7 @@
 
 The class requires the follow properties:
     'id' (str): the name of project used for the prefix of the stack name
+    'stage' (str): the name of the environment, default is empty
     'github_owner' (str): the github owner
     'github_repo' (str): the github repository name
     'github_branch' (str): the github repository branch
@@ -11,7 +12,7 @@ The class requires the follow properties:
     'buildspec_path' (str): path of buildspec file, default: buildspec.yml
     'manual_approval_exists' (bool): if True, then there will be a manual approval stage
 
-All properties are mandatory, except the last one that it has a default value of False.
+All properties are mandatory, except the last one that it has a default value of False, and the stage property.
 Here's an example:
 
     >>> from aws_cdk import core
@@ -19,6 +20,7 @@ Here's an example:
     >>> app = core.App()
     >>> PipelineStack(app,
     >>>     id="aws-simple-pipeline",
+    >>>     stage="sample",
     >>>     github_owner="bilardi",
     >>>     github_repo="aws-simple-pipeline",
     >>>     github_branch="master",
@@ -39,7 +41,7 @@ from aws_cdk import (core, aws_codebuild as codebuild,
 
 class PipelineStack(core.Stack):
 
-    def __init__(self, scope: core.Construct, id: str, *, github_owner: str=None, github_repo: str=None, github_branch: str=None, github_token: str=None, notify_emails: list=None, policies: list=None, buildspec_path: str='buildspec.yml', manual_approval_exists: bool=False, **kwargs) -> None:
+    def __init__(self, scope: core.Construct, id: str, *, stage: str='', github_owner: str=None, github_repo: str=None, github_branch: str=None, github_token: str=None, notify_emails: list=None, policies: list=None, buildspec_path: str='buildspec.yml', manual_approval_exists: bool=False, **kwargs) -> None:
         """
         deploys all AWS resources for your pipeline
             Resources:
@@ -51,9 +53,10 @@ class PipelineStack(core.Stack):
         """
         super().__init__(scope, id, **kwargs)
 
-        stage = ''
         if scope.node.try_get_context("stage"):
-            stage = '-' + scope.node.try_get_context("stage")
+            stage = scope.node.try_get_context("stage")
+        if stage:
+            stage = '-' + stage
 
         role = iam.Role(self, "role", assumed_by=iam.ServicePrincipal("codebuild.amazonaws.com"))
         for policy in policies:
@@ -68,7 +71,7 @@ class PipelineStack(core.Stack):
 
         project = codebuild.PipelineProject(
             self, "Project",
-            project_name=id + stage,
+            project_name=id,
             build_spec=codebuild.BuildSpec.from_source_filename(buildspec_path),
             cache=codebuild.Cache.bucket(artifact_bucket, prefix='codebuild-cache'),
             environment=codebuild.BuildEnvironment(
