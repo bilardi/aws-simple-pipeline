@@ -5,6 +5,17 @@ The **aws_simple_pipeline** package reads the file named **buildspec.yml** that 
 
 You can describe all steps that you need, directly in the **buildspec.yml** file, or you can run an external script for each step, that you can test it on your client.
 
+You have to manage a git token in **app.py**, and you can create it by `AWS console <https://docs.aws.amazon.com/secretsmanager/latest/userguide/manage_create-basic-secret.html>`_ or `aws-cli <https://docs.aws.amazon.com/cli/latest/reference/secretsmanager/create-secret.html>`_:
+
+.. code-block:: bash
+
+    aws secretsmanager create-secret \
+        --name /aws-simple-pipeline/secrets/github/token \
+        --secret-string '{"github-token":"YOUR_TOKEN"}'
+
+There are many methods for creating a secret object because it can be replicated automatically,
+but it is not the purpose of this guide. Now, we only need to create it once for all our implementations.
+
 Example
 #######
 
