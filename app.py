@@ -14,22 +14,28 @@ github_token = core.SecretValue.secrets_manager(
 notify_emails = [ "your@email.net" ]
 policies = [
     # "AdministratorAccess", # avoid in production
-    "AWSLambdaFullAccess",
+    "AWSLambda_FullAccess",
     "AWSCloudFormationFullAccess",
+    "CloudWatchLogsFullAccess",
+    "CloudWatchEventsFullAccess",
     "AmazonS3FullAccess",
     "IAMFullAccess",
 ]
+# buildspec_path = "buildspec.yml"
 manual_approval_exists = True
 
 app = core.App()
+# stage = app.node.try_get_context("stage")
 PipelineStack(app, 
     id=project_name,
+#    stage=stage,
     github_owner=github_owner,
     github_repo=github_repo,
     github_branch=github_branch,
     github_token=github_token,
     notify_emails=notify_emails,
     policies=policies,
+#    buildspec_path=buildspec_path,
     manual_approval_exists=manual_approval_exists
 )
 

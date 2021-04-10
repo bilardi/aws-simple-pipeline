@@ -16,5 +16,5 @@ it extended the core.Stack class of aws_cdk package.
 # license MIT
 # support https://github.com/bilardi/aws-simple-pipeline/issues
 """
-__version__ = '0.0.3'
+__version__ = '0.1.0'
 __author__ = 'Alessandra Bilardi'

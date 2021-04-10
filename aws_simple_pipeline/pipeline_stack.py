@@ -27,6 +27,7 @@ Here's an example:
     >>>     github_token=core.SecretValue.secrets_manager("/github/token",json_field='github-token'),
     >>>     notify_emails=[ "your@email.net" ],
     >>>     policies=[ "AdministratorAccess" ], # avoid in production
+    >>>     buildspec_path="buildspec.yml",
     >>>     manual_approval_exists=True
     >>> )
     >>> app.synth()
