@@ -64,7 +64,7 @@ class PipelineStack(core.Stack):
 
         artifact_bucket = s3.Bucket(
             self, 'BuildArtifactsBucket',
-            removal_policy=core.RemovalPolicy.RETAIN,
+            removal_policy=core.RemovalPolicy.DESTROY,
             encryption=s3.BucketEncryption.KMS_MANAGED,
             versioned=False,
         )
